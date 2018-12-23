@@ -47,7 +47,7 @@ success_msg("Отлично!")
 
 ---
 
-## Вычисление логарифмической доходности
+## Создание векторов 2
 
 ```yaml
 type: NormalExercise
@@ -60,34 +60,31 @@ skills: 5
 
 
 `@instructions`
-- У вас есть цены актива spy.
-- Вычислите логарифмическую доходность для этого актива и запишите ее в переменную r.
+- Сгенирируйте случайный вектор z длинной x, состоящий из случайных величин распределенных с мат. ожиданием 10 и стандартным отклонением 100.
 
 `@hint`
-Доходность это темп прироста цены
+Используйте функцию rnorm
 
 `@pre_exercise_code`
 ```{r}
-n=round(runif(1, min = 1, max = 30))
-load(url("http://s3.amazonaws.com/assets.datacamp.com/production/course_2233/datasets/SPY.RData"))
-spy=SPY[[1]][((n-1)*390+1):(n*390),2]
+x=round(runif(1,100,1000))
 ```
 
 `@sample_code`
 ```{r}
-r<-
+z=
 
 ```
 
 `@solution`
 ```{r}
-r<-diff(log(spy))
+z=rnorm(x,10,100)
 ```
 
 `@sct`
 ```{r}
-test_object("r")
-success_msg("Well done!")
+ex() %>% check_object("z") %>% check_equal()
+success_msg("Отлично!")
 ```
 
 ---
@@ -105,34 +102,35 @@ skills: 5
 
 
 `@instructions`
-- У вас есть логарифмическая доходность r.
-- Постройте её гистограмму с разбиением на 50 столбцов.
+- У вас есть случайная величина x.
+- Постройте её гистограмму с разбиением на 100 столбцов.
 
 `@hint`
 
 
 `@pre_exercise_code`
 ```{r}
-n=round(runif(1, min = 1, max = 30))
-load(url("http://s3.amazonaws.com/assets.datacamp.com/production/course_2233/datasets/SPY.RData"))
-spy=SPY[[1]][((n-1)*390+1):(n*390),2]
-r<-diff(log(spy))
+x=rchisq(10000, 40)
 ```
 
 `@sample_code`
 ```{r}
-r
+x
 
 ```
 
 `@solution`
 ```{r}
-hist(r,breaks = 50)
+hist(x,breaks = 100)
 ```
 
 `@sct`
 ```{r}
-test_function_result("hist")
+ex() %>% check_function("hist") %>% {
+  check_arg(., "x") %>% check_equal()
+  check_arg(., "breaks") %>% check_equal()
+}
+success_msg("Отлично!")
 ```
 
 ---
