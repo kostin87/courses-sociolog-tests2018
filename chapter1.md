@@ -4,7 +4,7 @@ description: 'Тестирование по эконометрии'
 attachments: null
 ---
 
-## Вычисление обычой доходности
+## Создание векторов 1
 
 ```yaml
 type: NormalExercise
@@ -17,34 +17,32 @@ skills: 5
 
 
 `@instructions`
-- У вас есть цены актива spy.
-- Вычислите обычную доходность для этого актива и запишите ее в переменную R.
+- У вас есть вектор x
+- Создайте вектор y  (1,2,3....) той же длинны что и вектор x.
 
 `@hint`
-Доходность это темп прироста цены
+Воспользуйтесь оператором ":"
 
 `@pre_exercise_code`
 ```{r}
-n=round(runif(1, min = 1, max = 30))
-load(url("http://s3.amazonaws.com/assets.datacamp.com/production/course_2233/datasets/SPY.RData"))
-spy=SPY[[1]][((n-1)*390+1):(n*390),2]
+x=rnorm(round(runif(1,100,1000),0))
 ```
 
 `@sample_code`
 ```{r}
-R<-
+y=
 
 ```
 
 `@solution`
 ```{r}
-R<-diff(spy)/spy[-NROW(spy)]
+y=1:NROW(x)
 ```
 
 `@sct`
 ```{r}
-ex() %>% check_object("R") %>% check_equal()
-success_msg("Well done!")
+ex() %>% check_object("y") %>% check_equal()
+success_msg("Отлично!")
 ```
 
 ---
