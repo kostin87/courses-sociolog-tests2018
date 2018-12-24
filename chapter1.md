@@ -560,10 +560,9 @@ xp: 50
 У вас есть результаты линейной регрессии fit. Что обозначает переменная zTRUE?
 
 `@possible_answers`
+- На сколько в среднем x в случае z TRUE больше, чем x в случае z FALSE
 - В среднем x больше у на величину коэффициента zTRUE
 - x является положительной величиной, потому что zTRUE>0
-- На сколько в среднем x в случае z TRUE больше, чем x в случае z FALSE
-- На сколько в среднем x в случае z TRUE больше, чем x в случае z FALSE, делить пополам
 
 `@hint`
 
@@ -580,5 +579,5 @@ fit=lm(x~y+z)
 ```{r}
 msg2 <- "Nice one!"
 msg3 <- "Not quite, give it another shot."
-ex() %>% check_mc(3, feedback_msgs = c(msg2, msg3))
+ex() %>% check_mc(1, feedback_msgs = c(msg2, msg3))
 ```
