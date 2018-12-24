@@ -60,7 +60,7 @@ skills: 5
 
 
 `@instructions`
-- Сгенирируйте случайный вектор z длинной x, состоящий из случайных величин распределенных с мат. ожиданием 10 и стандартным отклонением 100.
+- Сгенирируйте случайный вектор z длинной x, состоящий из случайных величин распределенных нормально с мат. ожиданием 10 и стандартным отклонением 100.
 
 `@hint`
 Используйте функцию rnorm
@@ -219,15 +219,15 @@ key: 7726022a2b
 xp: 50
 ```
 
-
+- У вас есть таблица сопряженности z
+- Существует ли зависимость между переменными в случае если вы выбрали 5% квантиль.
 
 `@possible_answers`
 - Зависимость существует
 - Зависимости нет
 
 `@hint`
-- У вас есть таблица сопряженности z
-- Существует ли зависимость между переменными в случае если вы выбрали 5% квантиль.
+
 
 `@pre_exercise_code`
 ```{r}
@@ -290,7 +290,8 @@ z=sum(abs(y-1))
 
 `@sct`
 ```{r}
-ex() %>% check_object("z") %>% check_object("y") %>% check_equal()
+ex() %>% check_object("y")  %>% check_equal()
+ex() %>% check_object("z")  %>% check_equal()
 success_msg("Отлично!")
 ```
 
@@ -452,6 +453,7 @@ x=rnorm(10000)
 y=x+rnorm(10000,1,100)
 z=x+rnorm(10000,0,5)>3
 fit=lm(x~y+z)
+
 ```
 
 `@sct`
@@ -459,7 +461,7 @@ fit=lm(x~y+z)
 msg2 <- "Nice one!"
 msg3 <- "Not quite, give it another shot."
 a=summary(fit)
-if(a$p.value>qf(fit$fstatistic[1],fit$fstatistic[2],fit$fstatistic[3])){
+if(a$fstatistic[1]>qf(0.95,a$fstatistic[2],a$fstatistic[3])){
   r=1
 }else{r=2}
 ex() %>% check_mc(r, feedback_msgs = c(msg2, msg3))
@@ -499,9 +501,9 @@ fit=lm(x~y+z)
 msg2 <- "Nice one!"
 msg3 <- "Not quite, give it another shot."
 a=summary(fit)
-if(fit$coefficients[2,4]>0.05){
-  r=1
-}else{r=2}
+if(a$coefficients[2,4]>0.05){
+  r=2
+}else{r=1}
 ex() %>% check_mc(r, feedback_msgs = c(msg2, msg3))
 ```
 
@@ -539,9 +541,9 @@ fit=lm(x~y+z)
 msg2 <- "Nice one!"
 msg3 <- "Not quite, give it another shot."
 a=summary(fit)
-if(fit$coefficients[3,4]>0.05){
-  r=1
-}else{r=2}
+if(a$coefficients[3,4]>0.05){
+  r=2
+}else{r=1}
 ex() %>% check_mc(r, feedback_msgs = c(msg2, msg3))
 ```
 
@@ -559,10 +561,9 @@ xp: 50
 
 `@possible_answers`
 - В среднем x больше у на величину коэффициента zTRUE
-- В среднем y больше x на величину коэффициента zTRUE
 - x является положительной величиной, потому что zTRUE>0
-- На сколько в среднем x в случае z=TRUE больше, чем x в случае z=FALSE
-- На сколько в среднем x в случае z=TRUE больше, чем x в случае z=FALSE, делить пополам
+- На сколько в среднем x в случае z TRUE больше, чем x в случае z FALSE
+- На сколько в среднем x в случае z TRUE больше, чем x в случае z FALSE, делить пополам
 
 `@hint`
 
@@ -579,5 +580,5 @@ fit=lm(x~y+z)
 ```{r}
 msg2 <- "Nice one!"
 msg3 <- "Not quite, give it another shot."
-ex() %>% check_mc(4, feedback_msgs = c(msg2, msg3))
+ex() %>% check_mc(3, feedback_msgs = c(msg2, msg3))
 ```
