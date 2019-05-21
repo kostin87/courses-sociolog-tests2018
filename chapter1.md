@@ -2,6 +2,7 @@
 title: 'Test 1'
 description: 'Тестирование по эконометрии'
 attachments: null
+free_preview: true
 ---
 
 ## Создание векторов 1
